@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { getMovies } from "../services/fakeMovieService";
+import { Link } from "react-router-dom";
+import { getMovies, deleteMovie } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
 import Pagination from "./common/pagination";
@@ -23,8 +24,8 @@ class Movies extends Component {
   }
 
   handleDelete = (movie) => {
-    const movies = this.state.movies.filter((m) => m !== movie);
-    this.setState({ movies: movies });
+    deleteMovie(movie._id);
+    this.setState({ movies: getMovies() });
   };
 
   handleLike = (movie) => {
@@ -88,7 +89,10 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
-          <p>There are {totalCount} movies in the database</p>
+          <Link to="/movies/new">
+            <button className="btn btn-primary">New Movie</button>
+          </Link>
+          <p className="mt-3">There are {totalCount} movies in the database</p>
           <MoviesTable
             movies={movies}
             onLike={this.handleLike}

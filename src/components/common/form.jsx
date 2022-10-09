@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi";
 import Input from "./input";
+import Select from "./select";
 
 // Extend your form components from this class rather than Component Class
 // Make sure that your form components have following things:
@@ -13,7 +14,8 @@ import Input from "./input";
 //      a. name is for the property in data in state
 //      b. label is for the label to show with input field
 //      c. type is for type of label, by default it is set to text
-// 2. renderButton(label) - This button is disabled if the data is invalid
+// 2.
+// 3. renderButton(label) - This button is disabled if the data is invalid
 //      label is for the content inside button
 
 class Form extends Component {
@@ -93,6 +95,21 @@ class Form extends Component {
         label={label}
         onChange={this.handleChange}
         error={errors[name]}
+      />
+    );
+  };
+
+  renderSelect = (name, label, options) => {
+    const { data, errors } = this.state;
+
+    return (
+      <Select
+        name={name}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChange}
+        error={errors[name]}
+        options={options}
       />
     );
   };

@@ -31,7 +31,7 @@ class Movies extends Component {
 
   handleDelete = async (movie) => {
     const originalMovies = this.state.movies;
-    const movies = originalMovies.filter((m) => m._id !== movie.id);
+    const movies = originalMovies.filter((m) => m._id !== movie._id);
     this.setState({ movies });
 
     try {
@@ -98,6 +98,7 @@ class Movies extends Component {
   render() {
     const { length: count } = this.state.movies;
     const { pageSize, currentPage, sortColumn, searchQuery } = this.state;
+    const { user } = this.props;
 
     if (count === 0) return <p>There are no movies in the database</p>;
 
@@ -113,9 +114,11 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
-          <Link to="/movies/new">
-            <button className="btn btn-primary">New Movie</button>
-          </Link>
+          {user && (
+            <Link to="/movies/new">
+              <button className="btn btn-primary">New Movie</button>
+            </Link>
+          )}
           <p className="mt-3">There are {totalCount} movies in the database</p>
           <SearchBox value={searchQuery} onChange={this.handlSearch} />
           <MoviesTable

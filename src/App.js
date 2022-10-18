@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Movies from "./components/movies";
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
@@ -8,6 +9,7 @@ import NotFound from "./components/notfound";
 import MoviesForm from "./components/moviesForm";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
@@ -27,6 +29,7 @@ function App() {
           <Redirect to="/not-found" />
         </Switch>
       </main>
+      <ToastContainer />
     </React.Fragment>
   );
 }
